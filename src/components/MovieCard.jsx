@@ -1,5 +1,7 @@
 import { StarIcon } from "@chakra-ui/icons";
 import {
+  Flex,
+  Stack,
   GridItem,
   Image,
   Card,
@@ -9,25 +11,32 @@ import {
 } from "@chakra-ui/react";
 
 function MovieCard(props) {
+  const { media } = props;
   return (
     <GridItem>
       <Card p={3} height={"100%"}>
         <Image
           display={{ base: "none", md: "inline-block" }}
-          src="https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg"
+          src={media.Poster}
         />
-        <Heading fontWeight={"500"}>{2023}</Heading>
-        <Text fontWeight={"500"}>{"Oppenheimer: The Real Story"}</Text>
-        <IconButton size={"xs"} icon={<StarIcon />} />
-      </Card>
-      <Card p={3} height={"100%"}>
-        <Image
-          display={{ base: "none", md: "inline-block" }}
-          src="https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg"
-        />
-        <Heading fontWeight={"500"}>{2023}</Heading>
-        <Text fontWeight={"500"}>{"Oppenheimer: The Real Story"}</Text>
-        <IconButton size={"xs"} icon={<StarIcon />} />
+        <Stack mt="3" spacing="2">
+          <Heading
+            fontWeight={"500"}
+            letterSpacing={"1px"}
+            size="sm"
+            noOfLines={1}
+          >
+            {media.Title}
+          </Heading>
+          <Flex
+            justifyContent={"space-between"}
+            color={"gray.500"}
+            fontSize={"xs"}
+          >
+            <Text fontWeight={"500"}>{media.Type}</Text>
+            <IconButton size={"xs"} icon={<StarIcon />} />
+          </Flex>
+        </Stack>
       </Card>
     </GridItem>
   );

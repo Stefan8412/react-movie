@@ -28,22 +28,23 @@ function App() {
   function search() {
     fetch(`http://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setResults(data.Search);
+        setSearchVal("");
+      });
+  }
+  function getMovieCard(item) {
+    return <MovieCard key={item.imdbID} media={item} />;
   }
   return (
     <>
       <NavigationBar />
       <Tabs isFitted variant="enclosed">
         <TabList>
-          <Tab>Favorites</Tab>
           <Tab>Search</Tab>
+          <Tab>Favorites</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
-            <MoviesLayout>
-              <p>favorites</p>
-            </MoviesLayout>
-          </TabPanel>
           <TabPanel>
             <Flex mx={"auto"} mt={3} gap={4} w={"min(720px,90%)"}>
               <InputGroup>
@@ -64,7 +65,12 @@ function App() {
               </Button>
             </Flex>
             <MoviesLayout>
-              <MovieCard />
+              {results.map((item) => getMovieCard(item))}
+            </MoviesLayout>
+          </TabPanel>
+          <TabPanel>
+            <MoviesLayout>
+              <p>favorites</p>
             </MoviesLayout>
           </TabPanel>
         </TabPanels>
