@@ -29,7 +29,7 @@ function App() {
     fetch(`https://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
       .then((res) => res.json())
       .then((data) => {
-        setResults(data.Search);
+        setResults(data.Search.filter((item) => item.Poster !== "N/A"));
         setSearchVal("");
       });
   }
