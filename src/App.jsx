@@ -20,6 +20,8 @@ import MovieCard from "./components/MovieCard";
 function App() {
   const [searchVal, setSearchVal] = useState("");
   const [results, setResults] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [favIds, setFavIds] = useState([]);
 
   function handleChange(event) {
     setSearchVal(event.target.value);
@@ -33,8 +35,19 @@ function App() {
         setSearchVal("");
       });
   }
+  function addToFavorites(data) {
+    setFavorites([data, ...favorites]);
+    setFavIds([data.imdbID, ...favIds]);
+  }
   function getMovieCard(item) {
-    return <MovieCard key={item.imdbID} media={item} />;
+    return (
+      <MovieCard
+        key={item.imdbID}
+        media={item}
+        add={addToFavorites}
+        isFav={favIds.indexOf(item.imdbID) > -1}
+      />
+    );
   }
   return (
     <>
@@ -70,7 +83,7 @@ function App() {
           </TabPanel>
           <TabPanel>
             <MoviesLayout>
-              <p>favorites</p>
+              {favorites.map((item) => getMovieCard(item))}
             </MoviesLayout>
           </TabPanel>
         </TabPanels>

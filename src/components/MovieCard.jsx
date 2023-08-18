@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 function MovieCard(props) {
-  const { media } = props;
+  const { media, add, remove, isFav } = props;
   return (
     <GridItem>
       <Card p={3} height={"100%"}>
@@ -34,7 +34,11 @@ function MovieCard(props) {
             fontSize={"xs"}
           >
             <Text fontWeight={"500"}>{media.Type}</Text>
-            <IconButton size={"xs"} icon={<StarIcon />} />
+            <IconButton
+              size={"xs"}
+              onClick={isFav ? () => remove(media) : () => add(media)}
+              icon={isFav ? <StarIcon color={"yellow.400"} /> : <StarIcon />}
+            />
           </Flex>
         </Stack>
       </Card>
