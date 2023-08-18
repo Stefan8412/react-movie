@@ -26,7 +26,7 @@ function App() {
   }
 
   function search() {
-    fetch(`http://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
+    fetch(`https://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
       .then((res) => res.json())
       .then((data) => {
         setResults(data.Search);
