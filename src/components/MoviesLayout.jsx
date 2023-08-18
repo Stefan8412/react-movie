@@ -6,9 +6,7 @@ function MoviesLayout(props) {
       p={5}
       as={"main"}
       spacing={5}
-      columns={4}
-      spacingX="40px"
-      spacingY="20px"
+      templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
     >
       {props.children}
     </SimpleGrid>
