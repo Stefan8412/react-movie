@@ -15,8 +15,21 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 import NavigationBar from "./components/NavigationBar";
 import MoviesLayout from "./components/MoviesLayout";
+import MovieCard from "./components/MovieCard";
 
 function App() {
+  const [searchVal, setSearchVal] = useState("");
+  const [results, setResults] = useState([]);
+
+  function handleChange(event) {
+    setSearchVal(event.target.value);
+  }
+
+  function search() {
+    fetch(`http://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
   return (
     <>
       <NavigationBar />
@@ -39,13 +52,19 @@ function App() {
                   height={"full"}
                   children={<SearchIcon />}
                 />
-                <Input size={"lg"} placeholder="Search for movies" />
+                <Input
+                  size={"lg"}
+                  value={searchVal}
+                  onChange={handleChange}
+                  placeholder="Search for movies"
+                />
               </InputGroup>
-              <Button size={"lg"}>Search</Button>
+              <Button onClick={search} size={"lg"}>
+                Search
+              </Button>
             </Flex>
             <MoviesLayout>
-              <p>searchs</p>
-              <p>searchs</p>
+              <MovieCard />
             </MoviesLayout>
           </TabPanel>
         </TabPanels>
