@@ -36,8 +36,12 @@ function App() {
       });
   }
   function addToFavorites(data) {
-    setFavorites([data, ...favorites]);
     setFavIds([data.imdbID, ...favIds]);
+    setFavorites([data, ...favorites]);
+  }
+  function removeFromFavorites(data) {
+    setFavIds(favIds.filter((item) => item !== data.imdbID));
+    setFavorites(favorites.filter((item) => item.imdbID !== data.imdbID));
   }
   function getMovieCard(item) {
     return (
@@ -45,6 +49,7 @@ function App() {
         key={item.imdbID}
         media={item}
         add={addToFavorites}
+        remove={removeFromFavorites}
         isFav={favIds.indexOf(item.imdbID) > -1}
       />
     );
