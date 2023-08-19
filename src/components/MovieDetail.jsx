@@ -18,7 +18,7 @@ function MovieDetail(props) {
   const [movieDetail, setMovieDetail] = useState(null);
 
   useEffect(() => {
-    fetch(`http://omdbapi.com/?apikey=ba81935e&i=${media.imdbID}`)
+    fetch(`https://omdbapi.com/?apikey=ba81935e&i=${media.imdbID}`)
       .then((res) => res.json())
       .then((data) => {
         setMovieDetail(data);
