@@ -10,6 +10,7 @@ import {
   TabPanels,
   InputGroup,
   InputLeftElement,
+  useToast,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -22,6 +23,17 @@ function App() {
   const [results, setResults] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [favIds, setFavIds] = useState([]);
+  const toast = useToast();
+
+  function showToast(title, description) {
+    toast({
+      title: title,
+      description: description,
+      status: "info",
+      duration: 2000,
+      isClosable: true,
+    });
+  }
 
   function handleChange(event) {
     setSearchVal(event.target.value);
@@ -38,10 +50,12 @@ function App() {
   function addToFavorites(data) {
     setFavIds([data.imdbID, ...favIds]);
     setFavorites([data, ...favorites]);
+    showToast("Added to favorites", data.Title);
   }
   function removeFromFavorites(data) {
     setFavIds(favIds.filter((item) => item !== data.imdbID));
     setFavorites(favorites.filter((item) => item.imdbID !== data.imdbID));
+    showToast("Removed from favorites", data.Title);
   }
   function getMovieCard(item) {
     return (

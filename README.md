@@ -1,4 +1,4 @@
-## Webapp which lets you search for movies , build with React+vite, Chakra UI
+## Webapp which lets you search for movies , build with React+vite, Chakra UI,omdbapi
 
 -install dependencies with
 
@@ -16,3 +16,4 @@
 
 - search for movies from http://omdbapi.com/
 - add/remove from favorites
+- check movie details
