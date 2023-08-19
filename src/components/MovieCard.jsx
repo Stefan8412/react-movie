@@ -10,9 +10,8 @@ import {
   Heading,
   Modal,
   useDisclosure,
-  ModalContent,
-  ModalBody,
 } from "@chakra-ui/react";
+import MovieDetail from "./MovieDetail";
 
 function MovieCard(props) {
   const { media, add, remove, isFav } = props;
@@ -23,6 +22,7 @@ function MovieCard(props) {
         <Image
           display={{ base: "inline-block", md: "inline-block" }}
           src={media.Poster}
+          onClick={onOpen}
         />
         <Stack mt="3" spacing="2">
           <Heading
@@ -40,11 +40,6 @@ function MovieCard(props) {
             fontSize={"xs"}
           >
             <Text fontWeight={"500"}>{media.Type}</Text>
-            <IconButton
-              size={"xs"}
-              onClick={isFav ? () => remove(media) : () => add(media)}
-              icon={isFav ? <StarIcon color={"yellow.400"} /> : <StarIcon />}
-            />
           </Flex>
         </Stack>
       </Card>
@@ -54,11 +49,12 @@ function MovieCard(props) {
         onClose={onClose}
         motionPreset="slideInBottom"
       >
-        <ModalContent>
-          <ModalBody>
-            <p>modal</p>
-          </ModalBody>
-        </ModalContent>
+        <MovieDetail
+          isFav={isFav}
+          media={media}
+          add={add}
+          remove={remove}
+        ></MovieDetail>
       </Modal>
     </GridItem>
   );
