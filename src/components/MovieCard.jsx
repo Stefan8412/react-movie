@@ -8,15 +8,20 @@ import {
   Text,
   IconButton,
   Heading,
+  Modal,
+  useDisclosure,
+  ModalContent,
+  ModalBody,
 } from "@chakra-ui/react";
 
 function MovieCard(props) {
   const { media, add, remove, isFav } = props;
+  const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <GridItem>
       <Card p={3} height={"100%"}>
         <Image
-          display={{ base: "none", md: "inline-block" }}
+          display={{ base: "inline-block", md: "inline-block" }}
           src={media.Poster}
         />
         <Stack mt="3" spacing="2">
@@ -25,6 +30,7 @@ function MovieCard(props) {
             letterSpacing={"1px"}
             size="sm"
             noOfLines={1}
+            onClick={onOpen}
           >
             {media.Title}
           </Heading>
@@ -42,6 +48,18 @@ function MovieCard(props) {
           </Flex>
         </Stack>
       </Card>
+      <Modal
+        isOpen={isOpen}
+        size={"full"}
+        onClose={onClose}
+        motionPreset="slideInBottom"
+      >
+        <ModalContent>
+          <ModalBody>
+            <p>modal</p>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </GridItem>
   );
 }

@@ -64,7 +64,7 @@ function App() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex mx={"auto"} mt={3} gap={4} w={"min(720px,90%)"}>
+            <Flex mx={"auto"} mt={4} gap={4} w={"min(720px,90%)"}>
               <InputGroup>
                 <InputLeftElement
                   pointerEvents="none"
