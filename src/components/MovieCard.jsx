@@ -40,6 +40,11 @@ function MovieCard(props) {
             fontSize={"xs"}
           >
             <Text fontWeight={"500"}>{media.Type}</Text>
+            <IconButton
+              size={"xs"}
+              onClick={isFav ? () => remove(media) : () => add(media)}
+              icon={isFav ? <StarIcon color={"yellow.400"} /> : <StarIcon />}
+            />
           </Flex>
         </Stack>
       </Card>
