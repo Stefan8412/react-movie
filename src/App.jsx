@@ -59,7 +59,7 @@ function App() {
   function handleChange(event) {
     setSearchVal(event.target.value);
   }
-
+  //if poster value is N/A ,item will be not included in search results
   function search() {
     fetch(`https://omdbapi.com/?apikey=ba81935e&s=${searchVal}`)
       .then((res) => res.json())
