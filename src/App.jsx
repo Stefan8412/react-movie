@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Tabs,
@@ -25,6 +25,27 @@ function App() {
   const [favIds, setFavIds] = useState([]);
   const toast = useToast();
 
+  //save in local storage to persist favorites
+  useEffect(() => {
+    const favorite = JSON.parse(localStorage.getItem("movie-app"));
+    if (favorite !== null) {
+      setFavorites(favorite);
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("movie-app", JSON.stringify(favorites));
+  }, [favorites]);
+  // save favIds in local storage due to properly show icon
+  useEffect(() => {
+    const favIds = JSON.parse(localStorage.getItem("movie-app-1"));
+    if (favIds !== null) {
+      setFavIds(favIds);
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("movie-app-1", JSON.stringify(favIds));
+  }, [favIds]);
+
   function showToast(title, description) {
     toast({
       title: title,
@@ -47,14 +68,17 @@ function App() {
         setSearchVal("");
       });
   }
+
   function addToFavorites(data) {
     setFavIds([data.imdbID, ...favIds]);
     setFavorites([data, ...favorites]);
+
     showToast("Added to favorites", data.Title);
   }
   function removeFromFavorites(data) {
     setFavIds(favIds.filter((item) => item !== data.imdbID));
     setFavorites(favorites.filter((item) => item.imdbID !== data.imdbID));
+
     showToast("Removed from favorites", data.Title);
   }
   function getMovieCard(item) {
